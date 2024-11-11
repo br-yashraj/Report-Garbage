@@ -21,7 +21,7 @@ body{
     margin-top: 10px;
 }
 .coordinates{
-    width: 180px;
+    width: 40vw;
     height: 30px;
     background: transparent;
     border: none;
@@ -29,7 +29,7 @@ body{
     font-size: 23px;
     display: flex;
     justify-content: center;
-    margin-right: 8px;
+    margin-right: 14px;
     border-bottom: 2px solid #162938;
 }
 
@@ -43,6 +43,8 @@ body{
 .video-cnt {
     display: flex;
     justify-content: space-around;
+    color: red;
+    
 }
 
 .videoPreview {
