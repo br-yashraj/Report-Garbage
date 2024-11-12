@@ -103,13 +103,15 @@ body{
 }
 
 .btn-submitAthority {
-    text-align: center;
+    position: relative; /* Ensure tooltip positions relative to this container */
+    display: flex;
+    justify-content: center;
 }
-
 
 #btn-send:disabled {
     background-color: #d3d3d3;
     cursor: not-allowed;
+    position: relative; /* Required for the tooltip to position correctly */
 }
 
 #btn-send:disabled:hover::after {
@@ -119,9 +121,15 @@ body{
     padding: 5px;
     border-radius: 5px;
     position: absolute;
-    bottom: 125%;
+    bottom: 150%; /* Position the tooltip above the button */
     left: 50%;
     transform: translateX(-50%);
     font-size: 12px;
+    width: max-content;
+    max-width: 200px;
+    /* white-space: nowrap; */
     z-index: 1;
+    text-align: center;
+    pointer-events: none; /* Ensure only the button itself is clickable */
 }
+
