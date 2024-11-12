@@ -1,6 +1,6 @@
 /* ! Main Body */
 body{
-    background-color: beige
+    background-color: beige;
 }
 #main-img{
     height: 170px;
@@ -11,8 +11,7 @@ body{
 .location{
     width: 100vw;
     height: 100px;
-    /* border: 2px solid black; */
-    color: red;
+    color: black;
     font-size: 25px;
 }
 #CurrLoc {
@@ -38,12 +37,12 @@ body{
     height: 210px;
     width: 100vw;
     background-color: transparent;
+    border: 2px solid black;
 }
 
 .video-cnt {
     display: flex;
     justify-content: space-around;
-    color: red;
     
 }
 
@@ -62,9 +61,16 @@ body{
     padding: 10px 15px;
     margin: 10px;
     cursor: pointer;
-    background-color: transparent;
-    color: red;
-    border-radius: 20px;
+    
+    color: white;
+    border-radius: 10px;
+}
+#startRecordingButton{
+    background-color: #4CAF50;
+}
+
+#stopRecordingButton{
+    background-color: rgba(185, 22, 22, 0.79);
 }
 
 .mobile{
@@ -75,7 +81,7 @@ body{
 #mob {
     background-color: transparent;
     height: 30px;
-    width: 80vw;
+    width: 70vw;
     margin-top: 25px;
     border: none;
     outline: none;
