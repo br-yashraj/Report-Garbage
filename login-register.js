@@ -6,6 +6,7 @@ const loginLink = document.querySelector(".login-link");
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
 const recorded = document.getElementById('recordedVideo');
+const sendNow = document.getElementById('btn-send');
 
 // Show login form on login button click
 loginButton.addEventListener("click", () => {
@@ -13,6 +14,7 @@ loginButton.addEventListener("click", () => {
   loginForm.style.display = "block";
   registerForm.style.display = "none";
   recorded.style.display = "none";
+  sendNow.style.display = "none";
 });
 
 // Show registration form on register link click
@@ -33,4 +35,5 @@ loginLink.addEventListener("click", (e) => {
 closeButton.addEventListener("click", () => {
   loginWrapper.style.display = "none";
   recorded.style.display = "flex";
+  sendNow.style.display = "block";
 });
