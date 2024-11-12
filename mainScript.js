@@ -1,4 +1,4 @@
-// ! Curent Loction
+// ! Current Location
 const locIcon = document.getElementById("Locationicon");
 
 function getLocation() {
@@ -13,7 +13,7 @@ function showLoc(pos) {
   document.getElementById("latitude").value = pos.coords.latitude;
   document.getElementById("longitude").value = pos.coords.longitude;
 }
-// Handle Error If any
+
 function showError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -30,6 +30,7 @@ function showError(error) {
       break;
   }
 }
+
 // Add event listener to the location icon to trigger geolocation
 locIcon.addEventListener("click", getLocation);
 
@@ -43,15 +44,9 @@ let mediaRecorder;
 let recordedChunks = [];
 let stream;
 
-// Feature detection: check if getUserMedia and MediaRecorder are supported
-if (
-  !navigator.mediaDevices ||
-  !navigator.mediaDevices.getUserMedia ||
-  !window.MediaRecorder
-) {
+if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) {
   alert("Your browser does not support video capture or recording.");
 } else {
-  // Start video capture using the rear camera
   function startVideoCapture() {
     const constraints = {
       video: {
@@ -70,7 +65,6 @@ if (
       });
   }
 
-  // Start recording
   function startRecording() {
     recordedChunks = [];
     mediaRecorder = new MediaRecorder(stream);
@@ -82,7 +76,6 @@ if (
     mediaRecorder.onstop = function () {
       const videoBlob = new Blob(recordedChunks, { type: "video/webm" });
       const videoUrl = URL.createObjectURL(videoBlob);
-
       recordedVideo.src = videoUrl;
     };
 
@@ -91,29 +84,52 @@ if (
     stopButton.disabled = false;
   }
 
-  // Stop recording
   function stopRecording() {
     mediaRecorder.stop();
     startButton.disabled = false;
     stopButton.disabled = true;
   }
 
-  // Start video capture when the page loads
   window.onload = startVideoCapture;
 
-  // Button event listeners
   startButton.addEventListener("click", startRecording);
   stopButton.addEventListener("click", stopRecording);
 }
 
-// ! Submit to Authority
+// ! Submit to Authority with Validation
 const submitBtn = document.getElementById("btn-send");
-const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
-if (localStorage.getItem("lastSubmissionDate") === today) {
-  submitBtn.disabled = true; // Disable if already submitted today
+const mobileInput = document.getElementById("mob");
+const latitudeInput = document.getElementById("latitude");
+const longitudeInput = document.getElementById("longitude");
+
+// Function to check if inputs are filled
+function checkInputs() {
+  const isMobileFilled = mobileInput.value.trim() !== "";
+  const isLatitudeFilled = latitudeInput.value.trim() !== "";
+  const isLongitudeFilled = longitudeInput.value.trim() !== "";
+
+  submitBtn.disabled = !(isMobileFilled && isLatitudeFilled && isLongitudeFilled);
 }
 
+// Add event listeners to monitor changes in the input fields
+mobileInput.addEventListener("input", checkInputs);
+latitudeInput.addEventListener("input", checkInputs);
+longitudeInput.addEventListener("input", checkInputs);
+
+// Click event with validation
 submitBtn.addEventListener("click", () => {
+  const isMobileFilled = mobileInput.value.trim() !== "";
+  const isLatitudeFilled = latitudeInput.value.trim() !== "";
+  const isLongitudeFilled = longitudeInput.value.trim() !== "";
+
+  // Show alert if any field is empty
+  if (!isMobileFilled || !isLatitudeFilled || !isLongitudeFilled) {
+    alert("Please fill in your mobile number and location (latitude and longitude) before submitting.");
+    return; // Stop further execution if fields are not filled
+  }
+
+  // Proceed with submission if all fields are filled
+  const today = new Date().toISOString().split("T")[0];
   localStorage.setItem("lastSubmissionDate", today);
   alert("Submission successful!");
   submitBtn.disabled = true;
