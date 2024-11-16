@@ -35,66 +35,91 @@ function showError(error) {
 locIcon.addEventListener("click", getLocation);
 
 // ! Real time Video Capturing
+// Elements from the DOM
 const videoElement = document.getElementById("videoElement");
 const startButton = document.getElementById("startRecordingButton");
 const stopButton = document.getElementById("stopRecordingButton");
 const recordedVideo = document.getElementById("recordedVideo");
 
-let mediaRecorder;
-let recordedChunks = [];
-let stream;
+let mediaRecorder; // To record the video
+let recordedChunks = []; // To store video data chunks
+let stream; // Video stream
 
-if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) {
+// Check if browser supports required APIs
+if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
   alert("Your browser does not support video capture or recording.");
 } else {
+  // Function to initialize video capture
   function startVideoCapture() {
     const constraints = {
-      video: {
-        facingMode: "environment", // Use the rear camera
-      },
+      video: { 
+        facingMode: { ideal: "environment" } // Use the rear camera if available
+      }
     };
 
     navigator.mediaDevices
       .getUserMedia(constraints)
-      .then(function (userStream) {
-        stream = userStream;
-        videoElement.srcObject = stream;
+      .then((userStream) => {
+        stream = userStream; // Save the video stream
+        videoElement.srcObject = stream; // Assign stream to video element
       })
-      .catch(function (error) {
-        console.error("Error accessing the camera: ", error);
+      .catch((error) => {
+        console.error("Error accessing the camera: ", error.name, error.message);
+        alert("Camera access failed: " + error.message);
       });
   }
 
+  // Function to start recording
   function startRecording() {
-    recordedChunks = [];
+    if (!stream) {
+      alert("Camera stream not initialized. Refresh and allow camera access.");
+      return;
+    }
+
+    recordedChunks = []; // Clear previous recordings
     mediaRecorder = new MediaRecorder(stream);
 
-    mediaRecorder.ondataavailable = function (event) {
-      recordedChunks.push(event.data);
+    mediaRecorder.ondataavailable = (event) => {
+      if (event.data.size > 0) {
+        recordedChunks.push(event.data);
+      }
     };
 
-    mediaRecorder.onstop = function () {
+    mediaRecorder.onstop = () => {
       const videoBlob = new Blob(recordedChunks, { type: "video/webm" });
       const videoUrl = URL.createObjectURL(videoBlob);
-      recordedVideo.src = videoUrl;
+      recordedVideo.src = videoUrl; // Set the recorded video URL
     };
 
-    mediaRecorder.start();
+    mediaRecorder.start(); // Start recording
     startButton.disabled = true;
     stopButton.disabled = false;
   }
 
+  // Function to stop recording
   function stopRecording() {
-    mediaRecorder.stop();
-    startButton.disabled = false;
-    stopButton.disabled = true;
+    if (mediaRecorder) {
+      mediaRecorder.stop(); // Stop the recorder
+      startButton.disabled = false;
+      stopButton.disabled = true;
+    }
   }
 
+  // Initialize video capture when the window loads
   window.onload = startVideoCapture;
 
+  // Event listeners for buttons
   startButton.addEventListener("click", startRecording);
   stopButton.addEventListener("click", stopRecording);
 }
+
+// Function to handle page unload (cleanup)
+window.onbeforeunload = () => {
+  if (stream) {
+    stream.getTracks().forEach((track) => track.stop()); // Stop all tracks
+  }
+};
+
 
 // ! Submit to Authority with Validation
 const submitBtn = document.getElementById("btn-send");
