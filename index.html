@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report garbage</title>
+    <link rel="Stylesheet" href="navStyle.css">
+    <link rel="Stylesheet" href="mainStyle.css">
+    <link rel="Stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div id="logo">
+            <img width="30px" src="svg/logo.svg">
+            <div id="hover-content">"Report Garbage."</div>
+        </div>
+        <ul id="nav-links">
+            <li><a href="#">Vision</a></li>
+            <button id="login" class="btnLogin">Login</button>
+            <li><a href="#"><img id="profile" width="38px" src="svg/profile.svg"></a></li>
+        </ul>
+    </nav>
+
+    <!-- Login Registration Popup -->
+    <div class="wrapper" id="login-wrapper">
+        <span class="close" id="close-btn"><img width="25px" src="svg/close.svg"></span>
+
+        <!-- Login Form -->
+        <div class="form-box login" id="login-form">
+            <h2>Login</h2>
+            <form class="form-login" action="#">
+                <div class="input-box">
+                    <span class="icon"><img width="30px" src="svg/email.svg"></span>
+                    <input class="credentials" type="email" required placeholder="Email">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img width="30px" src="svg/password.svg"></span>
+                    <input class="credentials" type="password" required placeholder="Password">
+                </div>
+                <div class="remember-forget">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forget Password?</a>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+                <div class="login-register">
+                    <span>Don't have an account? </span>
+                    <a href="#" class="register-link">Register</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form-box register" id="register-form" style="display: none;">
+            <h2>Registration</h2>
+            <form class="form-login" action="#">
+                <div class="input-box">
+                    <span class="icon"><img width="30px" src="svg/username.svg"></span>
+                    <input class="credentials" type="text" required placeholder="Username">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img width="30px" src="svg/email.svg"></span>
+                    <input class="credentials" type="email" required placeholder="Email">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img width="30px" src="svg/password.svg"></span>
+                    <input class="credentials" type="password" required placeholder="Password">
+                </div>
+                <button type="submit" class="btn-submit-register">Register</button>
+                <div class="login-register">
+                    <span>Already have an account? </span>
+                    <a href="#" class="login-link">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="img">
+            <img id="main-img" src="assert/MainImg.jpg">
+        </div>
+
+        <!-- Live Location  -->
+        <div class="location" id="location">
+            <center>Enter your Current Location</center>
+            <div id="CurrLoc">
+                <input class="coordinates" id="latitude" type="text" placeholder="Latitude" readonly>
+                <input class="coordinates" id="longitude" type="text" placeholder="Longitude" readonly>
+                <span>
+                    <img src="svg/locationIcon.svg" id="Locationicon" width="30" alt="Location Icon">
+                </span>
+            </div>
+        </div>
+
+        <!-- Capture Real time Video of garbage -->
+        <div class="videoContainer">
+            <div class="video-cnt">
+                <h3>Live Preview</h3>
+                <h3>Recorded Video</h3>
+            </div>
+            <div class="video-cnt">
+                <video id="videoElement" class="videoPreview" autoplay></video>
+                <video id="recordedVideo" class="videoPreview" controls></video>
+            </div>
+        </div>
+
+        <!-- Buttons to start and stop recording -->
+        <div class="btn-recording">
+            <button id="startRecordingButton">Start Recording</button>
+            <button id="stopRecordingButton" disabled>Stop Recording</button>
+        </div>
+
+        <div class="mobile">
+            <input type="number" id="mob" required placeholder="Your Mobile No">
+            <img src="svg/mobile.svg" width="45" alt="phone">
+        </div>
+
+        <div class="btn-submitAthority">
+            <button id="btn-send">
+                Send Now
+            </button>
+        </div>
+    </main>
+
+    <hr>
+
+    <footer>
+
+    </footer>
+
+    <script src="login-register.js"></script>
+    <script src="mainScript.js"></script>
+</body>
+
+</html>

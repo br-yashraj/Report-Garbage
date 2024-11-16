@@ -1,0 +1,134 @@
+/* ! Main Body */
+body{
+    background-color: beige
+}
+#main-img{
+    height: 170px;
+    width: 100vw;
+}
+
+/* ! Current Location */
+.location{
+    width: 100vw;
+    height: 100px;
+    /* border: 2px solid black; */
+    color: red;
+    font-size: 25px;
+}
+#CurrLoc {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.coordinates{
+    width: 40vw;
+    height: 30px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+    margin-right: 14px;
+    border-bottom: 2px solid #162938;
+}
+
+/* ! Video Capture */
+.videoContainer {
+    height: 210px;
+    width: 100vw;
+    background-color: transparent;
+}
+
+.video-cnt {
+    display: flex;
+    justify-content: space-around;
+    color: red;
+    
+}
+
+.videoPreview {
+    height: 180px;
+    max-width: 45vw;
+    border: 2px solid black;
+}
+
+.btn-recording {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-recording button {
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    color: red;
+    border-radius: 20px;
+}
+
+.mobile{
+    display: flex;
+    justify-content: center;
+}
+
+#mob {
+    background-color: transparent;
+    height: 30px;
+    width: 80vw;
+    margin-top: 25px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #162938;
+    font-size: 23px;
+    color: red;
+    text-align: center;
+}
+
+.btn-submitAthority{
+    display: flex;
+    justify-content: center;
+}
+#btn-send{
+    height: 50px;
+    width: 65vw;
+    padding: 10px 15px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.btn-submitAthority {
+    position: relative; /* Ensure tooltip positions relative to this container */
+    display: flex;
+    justify-content: center;
+}
+
+#btn-send:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+    position: relative; /* Required for the tooltip to position correctly */
+}
+
+#btn-send:disabled:hover::after {
+    content: "You have reached your submission limit for today.";
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 150%; /* Position the tooltip above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    width: max-content;
+    max-width: 200px;
+    /* white-space: nowrap; */
+    z-index: 1;
+    text-align: center;
+    pointer-events: none; /* Ensure only the button itself is clickable */
+}
